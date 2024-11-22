@@ -48,8 +48,8 @@ enum polyglot_layers {
    _STENO,
 
    _NUM_SYM,
-   _SETTINGS,
    _MACROS,
+   _SETTINGS,
 };
 
 #define KB_MAIN DF(_KB_MAIN)
@@ -171,7 +171,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    //|--------+--------+--------+--------+--------+--------|   |--------+--------+--------+--------+--------+--------|
       OSK_CTL,   KC_Z,    KC_X,    KC_C,  KC_V,    KC_B,        KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_QUOT,
    //|--------+--------+--------+--------+--------+--------|   |--------+--------+--------+--------+--------+--------|
-                                  MACROS, NUM_SYM, KC_LSFT,     KC_SPC,  NUM_SYM, KC_F5
+                                  MACROS, NUM_SYM, KC_LSFT,     KC_SPC,  NUM_SYM, SETTINGS
                               //`--------------------------'   `--------------------------'
    ),
 
@@ -181,7 +181,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    //|--------+--------+--------+--------+--------+--------|   |--------+--------+--------+--------+--------+--------|
       XXXXXXX, STN_S2,  STN_KL,  STN_WL,  STN_RL,  STN_ST2,     STN_ST4,  STN_RR,  STN_BR,  STN_GR,  STN_SR,  STN_ZR,
    //|--------+--------+--------+--------+--------+--------|   |--------+--------+--------+--------+--------+--------|
-      SETTINGS, KC_LSFT, KC_LCTL, KC_LALT, KC_LCMD, KC_SPC,    XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, NUM_SYM,
+      SETTINGS, KC_LSFT, KC_LCTL, KC_LALT, KC_LCMD, KC_SPC,     XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, NUM_SYM,
    //|--------+--------+--------+--------+--------+--------|   |--------+--------+--------+--------+--------+--------|
                                  STN_N1,  STN_A,   STN_O,       STN_E,    STN_U,   STN_N2
                               //`--------------------------'   `--------------------------'
@@ -199,6 +199,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                               //`--------------------------'  `--------------------------'
    ),
 
+   [_MACROS] = LAYOUT_split_3x6_3(
+   //,-----------------------------------------------------.   ,-----------------------------------------------------.
+      KC_LGUI, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_F5,       KC_F6, XXXXXXX,  KC_UP,  XXXXXXX,  XXXXXXX, LCTL(LALT(KC_DEL)),
+   //|--------+--------+--------+--------+--------+--------|   |--------+--------+--------+--------+--------+--------|
+      KC_LSFT, KC_LCTL, KC_LALT, XXXXXXX, XXXXXXX, XXXXXXX,     XXXXXXX, KC_LEFT, KC_DOWN, KC_RIGHT, XXXXXXX, XXXXXXX,
+   //|--------+--------+--------+--------+--------+--------|   |--------+--------+--------+--------+--------+--------|
+      OSK_NXT, XXXXXXX, KC_F5,   KC_F6,   XXXXXXX, XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX, 
+   //|--------+--------+--------+--------+--------+--------|   |--------+--------+--------+--------+--------+--------|
+                                 _______, XXXXXXX, XXXXXXX,     XXXXXXX, _______, SETTINGS
+                              //`--------------------------'   `--------------------------'
+   ),
+
    [_SETTINGS] = LAYOUT_split_3x6_3(
    //,-----------------------------------------------------.   ,-----------------------------------------------------.
       KC_MPLY, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,       KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  XXXXXXX,
@@ -210,18 +222,5 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                  _______, XXXXXXX, XXXXXXX,     XXXXXXX, _______, _______
                               //`--------------------------'   `--------------------------'
    ),
-
-   [_MACROS] = LAYOUT_split_3x6_3(
-   //,-----------------------------------------------------.   ,-----------------------------------------------------.
-      XXXXXXX, CTL_ALT, XXXXXXX, XXXXXXX, XXXXXXX, KC_F5,       XXXXXXX, XXXXXXX,  KC_UP,  XXXXXXX,  XXXXXXX, LCTL(LALT(KC_DEL)),
-   //|--------+--------+--------+--------+--------+--------|   |--------+--------+--------+--------+--------+--------|
-      KC_LSFT, CTL_SFT, ALT_SFT, XXXXXXX, XXXXXXX, XXXXXXX,     XXXXXXX, KC_LEFT, KC_DOWN, KC_RIGHT, XXXXXXX, XXXXXXX,
-   //|--------+--------+--------+--------+--------+--------|   |--------+--------+--------+--------+--------+--------|
-      OSK_NXT, KC_LCTL, KC_LALT, XXXXXXX, XXXXXXX, XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX, 
-   //|--------+--------+--------+--------+--------+--------|   |--------+--------+--------+--------+--------+--------|
-                                 _______, XXXXXXX, XXXXXXX,     XXXXXXX, _______, SETTINGS
-                              //`--------------------------'   `--------------------------'
-   ),
-
 };
 
