@@ -39,9 +39,18 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include QMK_KEYBOARD_H
+#define MAC_MODE_EEPROM_ADDR 0 // EEPROM address for macOS/Windows state
 
-// #define TAPPING_TERM 150
 static bool is_mac = false;
+
+// Load saved states from EEPROM when the keyboard boots up
+void matrix_init_user(void) {
+   is_mac = (bool)eeprom_read_byte((const uint8_t *)MAC_MODE_EEPROM_ADDR);
+}
+// save state to EEPROM
+void update_user_state(bool is_mac) {
+   eeprom_update_byte((uint8_t *)MAC_MODE_EEPROM_ADDR, (uint8_t)is_mac); // Save to EEPROM
+}
 
 enum polyglot_layers {
    _KB_MAIN,
@@ -93,51 +102,40 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       case OS_MAC:
          if (record->event.pressed) {
             is_mac = true;
+            update_user_state(is_mac);
          }
          return false;
       case OS_WIN:
          if (record->event.pressed) {
             is_mac = false;
+            update_user_state(is_mac);
          }
          return false;
       case OSK_CTL:
          if (record->event.pressed) {
-            if (is_mac) {
-                  register_code(KC_LGUI);
-            } else {
-                  register_code(KC_LCTL);
-            }
-         } else {
-            if (is_mac) {
-                  unregister_code(KC_LGUI);
-            } else {
-                  unregister_code(KC_LCTL);
-            }
+            if (is_mac) { register_code(KC_LGUI); }
+            else        { register_code(KC_LCTL); }
+         } 
+         else {
+            if (is_mac) { unregister_code(KC_LGUI); }
+			   else        { unregister_code(KC_LCTL); }
          }
          return false;
       case OSK_NXT:
          if (record->event.pressed) {
-            if (is_mac) {
-                  register_code(KC_LALT);
-            } else {
-                  register_code(KC_LCTL);
-            }
-         } else {
-            if (is_mac) {
-                  unregister_code(KC_LALT);
-            } else {
-                  unregister_code(KC_LCTL);
-            }
+            if (is_mac) { register_code(KC_LALT); } 
+            else        { register_code(KC_LCTL); }
+         } 
+         else {
+            if (is_mac) { unregister_code(KC_LALT); }
+            else        { unregister_code(KC_LCTL); }
          }
          return false;
       case OSK_TST:
          if (record->event.pressed) {
             // print current os mode
-            if (is_mac) {
-               SEND_STRING("MAC mode");
-            } else {
-               SEND_STRING("WIN mode");
-            }
+            if (is_mac) { SEND_STRING("MAC mode"); } 
+            else        { SEND_STRING("WIN mode"); }
          }
          return false;
       case IS_QUOT:
