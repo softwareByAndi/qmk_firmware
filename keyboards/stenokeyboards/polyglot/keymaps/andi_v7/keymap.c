@@ -16,17 +16,22 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include QMK_KEYBOARD_H
-#define MAC_MODE_EEPROM_ADDR 0 // EEPROM address for macOS/Windows state
+#define USER_FLAG_IS_MAC 0x01
 
 static bool is_mac = false;
 
 // Load saved states from EEPROM when the keyboard boots up
 void matrix_init_user(void) {
-   is_mac = (bool)eeprom_read_byte((const uint8_t *)MAC_MODE_EEPROM_ADDR);
+	uint8_t user_state = eeconfig_read_user();
+   is_mac = (bool)(user_state & USER_FLAG_IS_MAC); 
 }
-// save state to EEPROM
+
+// Save to EEPROM - using user state because that's what user state is for...
 void update_user_state(bool is_mac) {
-   eeprom_update_byte((uint8_t *)MAC_MODE_EEPROM_ADDR, (uint8_t)is_mac);
+	uint8_t user_state = eeconfig_read_user();
+	if (is_mac) { user_state |= USER_FLAG_IS_MAC; }
+	else        { user_state &= ~USER_FLAG_IS_MAC; }
+	eeconfig_update_user(user_state);
 }
 
 enum polyglot_layers {
@@ -124,9 +129,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
          if (record->event.pressed) {
             // print current os mode
             if (is_mac) {
-               SEND_STRING("MAC mode");
+               SEND_STRING("MAC ");
             } else {
-               SEND_STRING("WIN mode");
+               SEND_STRING("WIN ");
             }
          }
          return false;
