@@ -170,18 +170,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                               //`--------------------------'   `--------------------------'
    ),
 
-   [_STENO] = LAYOUT_split_3x6_3(
-   //,-----------------------------------------------------.   ,-----------------------------------------------------.
-      XXXXXXX, STN_S1,  STN_TL,  STN_PL,  STN_HL,  STN_ST1,     STN_ST3,  STN_FR,  STN_PR,  STN_LR,  STN_TR,  STN_DR,
-   //|--------+--------+--------+--------+--------+--------|   |--------+--------+--------+--------+--------+--------|
-      XXXXXXX, STN_S2,  STN_KL,  STN_WL,  STN_RL,  STN_ST2,     STN_ST4,  STN_RR,  STN_BR,  STN_GR,  STN_SR,  STN_ZR,
-   //|--------+--------+--------+--------+--------+--------|   |--------+--------+--------+--------+--------+--------|
-      SETTINGS, KC_LSFT, KC_LCTL, KC_LALT, KC_LCMD, KC_SPC,     XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, NUM_SYM,
-   //|--------+--------+--------+--------+--------+--------|   |--------+--------+--------+--------+--------+--------|
-                                 STN_N1,  STN_A,   STN_O,       STN_E,    STN_U,   STN_N2
-                              //`--------------------------'   `--------------------------'
-   ),
-
    [_NUM_SYM] = LAYOUT_split_3x6_3(
    //,-----------------------------------------------------.  ,-----------------------------------------------------.
       KC_LGUI,  KC_1,   KC_2,    KC_3,    KC_4,    KC_5,       KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC,
@@ -224,7 +212,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    //|--------+--------+--------+--------+--------+--------|   |--------+--------+--------+--------+--------+--------|
       XXXXXXX, XXXXXXX, XXXXXXX, KC_MUTE, KC_VOLU, KC_MNXT,     XXXXXXX, XXXXXXX, XXXXXXX, OS_WIN,  OS_MAC,  OSK_TST,
    //|--------+--------+--------+--------+--------+--------|   |--------+--------+--------+--------+--------+--------|
-      _______, XXXXXXX, XXXXXXX, XXXXXXX, KC_VOLD, KC_MPRV,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KB_MAIN, STENO, 
+      _______, XXXXXXX, XXXXXXX, XXXXXXX, KC_VOLD, KC_MPRV,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, 
    //|--------+--------+--------+--------+--------+--------|   |--------+--------+--------+--------+--------+--------|
                                  _______, XXXXXXX, XXXXXXX,     XXXXXXX, _______, _______
                               //`--------------------------'   `--------------------------'
